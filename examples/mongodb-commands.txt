@@ -1,0 +1,3 @@
+To delete a key from an existing entry:
+
+db.contestants.updateOne({ _id: ObjectId("61439122baac0e5c10aea81b") }, { $unset : { castingSheets : 1} })

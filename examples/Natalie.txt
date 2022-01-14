@@ -1,0 +1,93 @@
+GET localhost:8080/api/contestants/61439122baac0e5c10aea81b
+
+{
+    "firstName": "Natalie",
+    "lastName": "Anderson",
+    "birthdate": "1986-04-11",
+    "raceAndEthnicity": [
+        "Asian"
+    ],
+    "hometown": {
+        "city": "Colombo",
+        "country": "Sri Lanka"
+    },
+    "seasons": [
+      {
+        "seasonId": 29,
+        "castingSheet": {
+          "residence": {
+              "city": "Edgewater",
+              "state": "New Jersey",
+              "country": "USA"
+          },
+          "relationshipStatus": "single",
+          "children": 0,
+          "occupations": [
+            {
+              "title": "CrossFit Trainer"
+            },
+            {
+              "title": "Physical Therapy Student"
+            }
+          ]
+        }
+      },
+      {
+        "seasonId": 40,
+        "castingSheet": {
+          "residence": {
+              "city": "Edgewater",
+              "state": "New Jersey",
+              "country": "USA"
+          },
+          "relationshipStatus": "single",
+          "children": 0,
+          "occupations": [
+            {
+              "title": "CrossFit Trainer"
+            }
+          ]
+        }
+      }
+    ]
+}
+
+[
+  {
+    _id: ObjectId("61439122baac0e5c10aea81b"),
+    firstName: 'Natalie',
+    lastName: 'Anderson',
+    createdAt: ISODate("2021-09-16T18:46:58.411Z"),
+    updatedAt: ISODate("2022-01-12T19:32:53.055Z"),
+    __v: 0,
+    gender: [ 'female' ],
+    hometown: { city: 'Colombo', country: 'Sri Lanka' },
+    birthdate: ISODate("1986-04-11T00:00:00.000Z"),
+    raceAndEthnicity: [ 'Asian' ],
+    sexualOrientation: 'heterosexual',
+    seasons: [
+      {
+        seasonId: 29,
+        castingSheet: {
+          residence: { city: 'Edgewater', state: 'New Jersey', country: 'USA' },
+          relationshipStatus: 'single',
+          children: 0,
+          occupations: [
+            { title: 'CrossFit Trainer' },
+            { title: 'Physical Therapy Student' }
+          ]
+        }
+      },
+      {
+        seasonId: 40,
+        castingSheet: {
+          residence: { city: 'Edgewater', state: 'New Jersey', country: 'USA' },
+          relationshipStatus: 'single',
+          children: 0,
+          occupations: [ { title: 'CrossFit Trainer' } ]
+        }
+      }
+    ],
+    wikia: 'http://survivor.wikia.com/wiki/Natalie_Anderson'
+  }
+]
