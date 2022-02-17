@@ -93,7 +93,7 @@ exports.update = (req, res) => {
 
 exports.findAllWithSeason = (req, res) => {
   const seasonId = req.params.id;
-  Contestant.find({ 'seasons.seasonId': seasonId }, 'firstName lastName')
+  Contestant.find({ 'seasons.seasonId': seasonId })
     .then(data => {
       if (!data)
         res.status(404).send({ message: `Season ${seasonId} not found.` });

@@ -80,8 +80,27 @@ const SeasonSchema = new Schema(
     seasonId: {
       type: Number,
     },
-    castingSheet: {
-      type: CastingSheetSchema,
+    residence: LocationSchema,
+    relationshipStatus: {
+      type: String,
+      enum: RELATIONSHIP_STATUS_ENUM,
+      default: undefined
+    },
+    children: Number,
+    education: {
+      type: [EducationSchema],
+      default: undefined
+    },
+    occupations: {
+        type: [OccupationSchema],
+        default: undefined
+    },
+    selfDescriptions: {
+      type: [String],
+      default: undefined
+    },
+    hobbies: {
+      type: [String],
       default: undefined
     }
   },

@@ -1,4 +1,64 @@
 GET localhost:8080/api/contestants/61439122baac0e5c10aea81b
+{
+    "_id": "61e08308d26d9b1673bb72cd",
+    "firstName": "Natalie",
+    "lastName": "Anderson",
+    "gender": [
+        "female"
+    ],
+    "wikia": "http://survivor.wikia.com/wiki/Natalie_Anderson",
+    "seasons": [
+        {
+            "seasonId": 29,
+            "castingSheet": {
+                "residence": {
+                    "city": "Edgewater",
+                    "state": "New Jersey",
+                    "country": "USA"
+                },
+                "relationshipStatus": "single",
+                "children": 0,
+                "occupations": [
+                    {
+                        "title": "CrossFit Trainer"
+                    },
+                    {
+                        "title": "Physical Therapy Student"
+                    }
+                ]
+            }
+        },
+        {
+            "seasonId": 40,
+            "castingSheet": {
+                "residence": {
+                    "city": "Edgewater",
+                    "state": "New Jersey",
+                    "country": "USA"
+                },
+                "relationshipStatus": "single",
+                "children": 0,
+                "occupations": [
+                    {
+                        "title": "CrossFit Trainer"
+                    }
+                ]
+            }
+        }
+    ],
+    "createdAt": "2022-01-13T19:52:40.755Z",
+    "updatedAt": "2022-01-20T23:49:02.553Z",
+    "__v": 0,
+    "birthdate": "1986-04-11T00:00:00.000Z",
+    "hometown": {
+        "city": "Colombo",
+        "country": "Sri Lanka"
+    },
+    "raceAndEthnicity": [
+        "Asian"
+    ],
+    "sexualOrientation": "heterosexual"
+}
 
 {
     "firstName": "Natalie",

@@ -9,8 +9,8 @@ const LocationSchema = new Schema(
     province: String,
     country: String,
     coordinates: {
-      x: Number, //longitude
-      y: Number  //latitude
+      lat: Number, //latitude
+      lng: Number //longitude
     }
   },
   { _id : false }
