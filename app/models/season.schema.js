@@ -1,4 +1,4 @@
-const {LocationSchema} = require("./common.schema.js");
+const {LocationSchema} = require("./location.schema.js");
 const {Schema} = require("mongoose");
 
 module.exports = Schema (

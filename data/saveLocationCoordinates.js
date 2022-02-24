@@ -4,15 +4,14 @@ const fs = require('fs')
 const db = require("../app/models")
 const location = require("survivor-stats-common/helpers/location")
 const {dbconnect, dbclose} = require("../app/helpers/dbConnect.js")
+const GoogleMapsService = require("../app/services/GoogleMapsService")
 
 dbconnect()
 
 const Contestant = db.contestants
-const API_KEY = process.env.GEOCODE_API_KEY
-const BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 
 const contestantId = null
-const seasonId = 41
+const seasonId = 40
 const skipExistCoord = true
 //const updateHometown = true;
 //const updateResidence = true;
@@ -22,18 +21,25 @@ async function saveLocationCoord() {
   const contestants = await getRequestedContestants()
 
   const hometownContestants = contestants.filter(c => shouldUpdateHometownCoord(c))
-  console.log(hometownContestants)
+  //console.log(hometownContestants)
+  let successMsgs = []
+  let errorMsgs = []
 
   hometownContestants.map(contestant => {
-      getCoord(location.getText(contestant.hometown))
+      const hometownTxt = location.getText(contestant.hometown)
+      GoogleMapsService.getCoord(hometownTxt)
         .then(function(coord) {
           contestant.hometown.coordinates = coord
           contestant.save()
-          console.log(`Succeeded to update coordinates ${contestant.hometown.coordinates} for contestant ${contestant._id}.`)
+          successMsgs.push(`Succeeded to update coordinates for contestant ${contestant._id} with location ${hometownTxt}.`)
         }).catch(function(error) {
-          console.log(`Failed to update coordinates for contestant ${contestant._id}. Received error ${error}`)
+          errorMsgs.push(`Failed to update coordinates for contestant ${contestant._id} with location ${hometownTxt}. Received error ${error}`)
         })
   })
+
+  // need to modify to work for async getCoord. Right now, the length will still be zero
+  const summary = `${successMsgs.length} out of ${hometownContestants.length} coordinate updates succeeded.`
+  console.log(summary)
 }
 
 function getRequestedContestants() {
@@ -44,30 +50,9 @@ function getRequestedContestants() {
 
 function shouldUpdateHometownCoord(contestant) {
   if (!location.getText(contestant.hometown)) {
-    console.log("here1")
     return false
   } if (skipExistCoord && contestant.hometown.coordinates.lat && contestant.hometown.coordinates.lng) {
-    console.log("here2")
     return false
   }
-  console.log("here3")
   return true
-}
-
-function getCoord(locationTxt) {
-    var url = BASE_URL + locationTxt + "&key=" + API_KEY
-    return new Promise(function(resolve,reject) {
-      request(url, function (error, response, body) {
-          if (error) {
-            reject(`geocode API failed for address ${locationTxt} with error ${error}.`)
-          } else if (response.statusCode != 200) {
-            reject(`geocode API failed for address ${locationTxt} with statusCode ${response.statusCode}.`)
-          } else {
-            const coord = JSON.parse(body).results[0].geometry.location
-            const msg = `geocode API succeeded for address ${locationTxt} with coordinates ${coord.lat} ${coord.lng}.`
-            console.log(msg)
-            resolve(coord)
-          }
-      })
-    })
 }

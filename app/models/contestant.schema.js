@@ -1,4 +1,4 @@
-const {LocationSchema} = require("./common.schema.js");
+const {LocationSchema} = require("./location.schema.js");
 const {Schema} = require("mongoose");
 
 const RACE_ETHNICITY_ENUM = require("survivor-stats-common/models/raceAndEthnicity");
@@ -79,35 +79,17 @@ const SeasonSchema = new Schema(
   {
     seasonId: {
       type: Number,
+
     },
-    residence: LocationSchema,
-    relationshipStatus: {
-      type: String,
-      enum: RELATIONSHIP_STATUS_ENUM,
-      default: undefined
-    },
-    children: Number,
-    education: {
-      type: [EducationSchema],
-      default: undefined
-    },
-    occupations: {
-        type: [OccupationSchema],
-        default: undefined
-    },
-    selfDescriptions: {
-      type: [String],
-      default: undefined
-    },
-    hobbies: {
-      type: [String],
+    castingSheet: {
+      type: CastingSheetSchema,
       default: undefined
     }
   },
   { _id : false }
 );
 
-module.exports = Schema (
+var ContestantSchema = new Schema (
     {
       firstName: {
         type: String,
@@ -146,6 +128,7 @@ module.exports = Schema (
     { timestamps: true }
   );
 
+module.exports = ContestantSchema
 
 /*
 
