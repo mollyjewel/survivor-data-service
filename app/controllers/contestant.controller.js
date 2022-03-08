@@ -1,5 +1,8 @@
 const db = require("../models");
 const Contestant = db.contestants;
+const {getSeasonIds} = require("../data-access/season.data.js")
+const {getContestantGendersAndSeasons} = require("../data-access/contestant.data.js")
+const GenderCounter = require("../services/GenderCounter")
 
 // Create and Save a new Contestant
 exports.create = (req, res) => {
@@ -104,6 +107,29 @@ exports.findAllWithSeason = (req, res) => {
         .status(500)
         .send({ message: `Error retrieving Contestants with seasonId ${seasonId}.` });
     });
+}
+
+/*[
+  {
+    "seasonId": 1,
+    "male": 15,
+    "female": 10,
+    "trans male": 1,
+    "nonbinary": 1,
+  },
+  */
+
+exports.findGenderPercents = async function findGenderPercents(req, res) {
+  try {
+    const seasonIds = await getSeasonIds()
+    const contestants = await getContestantGendersAndSeasons()
+    const genderCounter = new GenderCounter(seasonIds).addContestants(contestants)
+    return res.status(200).send(genderCounter.getSeasonGenderPercents())
+  } catch(e) {
+    return res
+      .status(500)
+      .send({ message: `Error finding gender percents ${e}` });
+  }
 }
 
 exports.addCastingSheet = (req, res) => {

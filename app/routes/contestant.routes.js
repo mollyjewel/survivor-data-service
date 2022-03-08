@@ -15,6 +15,9 @@ module.exports = app => {
   // Retrieve a all Contestants with seasonId
   router.get("/season/:id", contestants.findAllWithSeason);
 
+  // Retrieve all Contestant genders by season
+  router.get("/gender/percents/", contestants.findGenderPercents);
+
   // Update a Contestant with id
   router.put("/:id", contestants.update);
 
