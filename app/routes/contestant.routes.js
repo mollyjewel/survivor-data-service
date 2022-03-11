@@ -18,6 +18,12 @@ module.exports = app => {
   // Retrieve all Contestant genders by season
   router.get("/gender/percents/", contestants.findGenderPercents);
 
+  // Retrieve all Contestant race and ethnicities by season
+  router.get("/race/percents/", contestants.findRacePercents);
+
+  // Retrieve all Contestant sexual orientations by season
+  router.get("/sexualOrientation/percents/", contestants.findSexOrientPercents);
+
   // Update a Contestant with id
   router.put("/:id", contestants.update);
 

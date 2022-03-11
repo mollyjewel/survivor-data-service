@@ -5,8 +5,18 @@ let getContestantGendersAndSeasons = () => {
   return Contestant.find({},{gender: 1, "seasons.seasonId":1}).lean()
 }
 
+let getContestantRacesAndSeasons = () => {
+  return Contestant.find({},{raceAndEthnicity: 1, "seasons.seasonId":1}).lean()
+}
+
+let getContestantSexOrientAndSeasons = () => {
+  return Contestant.find({},{sexualOrientation: 1, "seasons.seasonId":1}).lean()
+}
+
 module.exports = {
-  getContestantGendersAndSeasons
+  getContestantGendersAndSeasons,
+  getContestantRacesAndSeasons,
+  getContestantSexOrientAndSeasons
 }
 
 /*let listStudents = () => {

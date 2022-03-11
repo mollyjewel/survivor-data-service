@@ -1,8 +1,10 @@
 const db = require("../models");
 const Contestant = db.contestants;
 const {getSeasonIds} = require("../data-access/season.data.js")
-const {getContestantGendersAndSeasons} = require("../data-access/contestant.data.js")
-const GenderCounter = require("../services/GenderCounter")
+const {getContestantGendersAndSeasons, getContestantRacesAndSeasons, getContestantSexOrientAndSeasons} = require("../data-access/contestant.data.js")
+const SeasonalGenderCounter = require("../counters/SeasonalGenderCounter")
+const SeasonalRaceCounter = require("../counters/SeasonalRaceCounter")
+const SeasonalSexOrientCounter = require("../counters/SeasonalSexOrientCounter")
 
 // Create and Save a new Contestant
 exports.create = (req, res) => {
@@ -123,12 +125,38 @@ exports.findGenderPercents = async function findGenderPercents(req, res) {
   try {
     const seasonIds = await getSeasonIds()
     const contestants = await getContestantGendersAndSeasons()
-    const genderCounter = new GenderCounter(seasonIds).addContestants(contestants)
-    return res.status(200).send(genderCounter.getSeasonGenderPercents())
+    const genderCounter = new SeasonalGenderCounter(seasonIds).addContestants(contestants)
+    return res.status(200).send(genderCounter.getSeasonalPercents())
   } catch(e) {
     return res
       .status(500)
       .send({ message: `Error finding gender percents ${e}` });
+  }
+}
+
+exports.findRacePercents = async function findRacePercents(req, res) {
+  try {
+    const seasonIds = await getSeasonIds()
+    const contestants = await getContestantRacesAndSeasons()
+    const raceCounter = new SeasonalRaceCounter(seasonIds).addContestants(contestants)
+    return res.status(200).send(raceCounter.getSeasonalPercents())
+  } catch(e) {
+    return res
+      .status(500)
+      .send({ message: `Error finding race and ethnicity percents ${e}` });
+  }
+}
+
+exports.findSexOrientPercents = async function findSexOrientPercents(req, res) {
+  try {
+    const seasonIds = await getSeasonIds()
+    const contestants = await getContestantSexOrientAndSeasons()
+    const sexOrientCounter = new SeasonalSexOrientCounter(seasonIds).addContestants(contestants)
+    return res.status(200).send(sexOrientCounter.getSeasonalPercents())
+  } catch(e) {
+    return res
+      .status(500)
+      .send({ message: `Error finding sex orientation percents ${e}` });
   }
 }
 
