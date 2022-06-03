@@ -46,8 +46,11 @@ const OccupationSchema = new Schema(
   { _id : false }
 );
 
-const CastingSheetSchema = new Schema(
+const SeasonSchema = new Schema(
   {
+    seasonId: {
+      type: Number
+    },
     residence: LocationSchema,
     relationshipStatus: {
       type: String,
@@ -69,20 +72,6 @@ const CastingSheetSchema = new Schema(
     },
     hobbies: {
       type: [String],
-      default: undefined
-    }
-  },
-  { _id : false }
-);
-
-const SeasonSchema = new Schema(
-  {
-    seasonId: {
-      type: Number,
-
-    },
-    castingSheet: {
-      type: CastingSheetSchema,
       default: undefined
     }
   },
@@ -129,97 +118,3 @@ var ContestantSchema = new Schema (
   );
 
 module.exports = ContestantSchema
-
-/*
-
-
-field: {
-  enum: [
-    'Sports & Fitness',
-    'Arts & Entertainment',
-    'Science & Technology',
-    'Architecture & Engineering',
-    'Public Service',
-    'Service'
-    'Agriculture',
-    'Education',
-    'Health & Medicine',
-    'Law & Politics',
-    'Business & Management',
-    'Communications']
-}
-
-A Asexual
-Bi Bisexual
-Hetero Heterosexual
-Homo Homosexual
-
-The standards have five categories for data on race: Hispanic or Latino, American Indian or Alaska Native, Asian, Black or African American, Native Hawaiian or Other Pacific Islander, and White.
-
-{
-   $jsonSchema: {
-      required: ['firstname', 'lastname'], // the customer field is required
-      properties: {
-        firstname: {bsonType: "string"},
-        lastname: {bsonType: "string"},
-        nickname: {bsonType: "string"},
-        gender: {
-           enum: ['male', 'female', 'trans']
-        }
-        birthdate: {bsonType: "date"},
-        occupation: {
-          title: {bsonType: "string"},
-        }
-      }
-   }
-}
-
-
-{
-firstname: "",
-lastname: "",
-nickname: "",
-gender: "",
-birthdate: {day: , month: , year: },
-hometown:
-residence: //residence when casted
-occupation: [],
-race:[],
-sexualOrientation: "",
-seasons: []  // competitor ids should be in season instead
-}
-
-{
-  firstName: "Natalie",
-  lastName: "Anderson",
-  gender: "female",
-  birthdate: {day: 11, month: 4, year: 1986},
-  hometown: {city: "Colombo", country: "Sri Lanka"}
-  residence: {city: "Edgewater", state: "New Jersey"},
-  occupations: [
-  {
-  title: "CrossFit Trainer"
-  },
-  {
-  title: "Physical Therapy Student"
-  }],
-  race:["asian"]
-}
-
-{
-firstname: "Benjamin",
-lastname: "Wade",
-gender: "Male",
-nickname: "Coach",
-birthday: {day: 18, month: 9, year: 1971},
-hometown: {city: "Bolivar", state: "Missouri", country: "USA"}
-occupation: {
-  title: "Soccer Coach",
-  field: "Sports & Fitness",
-},
-race:["white"]
-seasons: [18, 20, 23]
-}
-
-
-*/

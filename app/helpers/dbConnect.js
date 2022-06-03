@@ -1,13 +1,11 @@
 const db = require("../models");
-const dbDevUrl = "mongodb://localhost:27017/survivorBetaDB";
-const dbProdUrl = "mongodb://localhost:27017/survivorDB";
 
 function dbconnect() {
     //mongoose.connect(DB_uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false})
     //return mongoose.connection
 
     db.mongoose
-      .connect(dbProdUrl, {
+      .connect(process.env.PROD_SURVIVOR_DB, {
         useNewUrlParser: true,
         useUnifiedTopology: true
       })
