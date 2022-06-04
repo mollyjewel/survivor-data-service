@@ -2,6 +2,9 @@
   "name": "survivorstats",
   "version": "1.0.0",
   "description": "Serves data and statistics from the reality TV game show Survivor.",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "server.js",
   "scripts": {
     "test": "mocha --recursive --exit --timeout 10000",
