@@ -25,7 +25,7 @@ dbconnect();
 require('./app/auth/auth')
 
 app.get("/", function(req, res){
-  res.render("home");
+  res.send("Welcome to the Survivor Stats Data Server")
 });
 
 /*
