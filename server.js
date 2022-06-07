@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: process.env.SURVIVOR_STATS_WEBSITE_ORIGIN
 };
 
 app.use(cors(corsOptions));
